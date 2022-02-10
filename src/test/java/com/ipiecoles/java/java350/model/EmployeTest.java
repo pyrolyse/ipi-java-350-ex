@@ -6,6 +6,8 @@ package com.ipiecoles.java.java350.model;
 import org.junit.jupiter.api.Test;
 
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 import java.time.LocalDate;
 
@@ -61,6 +63,39 @@ public class EmployeTest {
 
         Assertions.assertThat(dateEmbauchenull).isEqualTo(0);
 
+    }
+
+    //si un employe est un manager => prime de 2200
+    @Test
+    public void TestCheckPrimeManager() {
+        LocalDate d3 = LocalDate.now().minusYears(5);
+        Employe manager = new Employe("Test", "Test", "M25520", d3, 1000d, 1, 1.0);
+
+        Double prime = manager.getPrimeAnnuelle();
+
+        Assertions.assertThat(prime).isEqualTo(2200d);
+    }
+
+    @ParameterizedTest(name = "matricule {0}, ancienneté {1}, taux activité {2}, performance {3} => prime {4}")
+    @CsvSource({
+            "'M12345', 0, 1.0, 1, 1700.0", //1000 * 1.7 + 0 * 1 = 1700
+            "'M12345', 2, 1.0, 1, 1900.0" //1000 * 1.7 + 0 * 1 = 1700
+    })
+//Paramètres : matricule, ancienneté, taux d'activité, performance, prime
+    public void testGetPrimeAnnuelle(
+            String matricule,
+            Integer nbAnneesAnciennete,
+            Double tauxActivite,
+            Integer performance,
+            Double primeCalculee){
+        //Given
+        //Manager : matricule M12345 embauché cette année à plein temps
+        Employe employe = new Employe("Doe", "John",
+                matricule, LocalDate.now().minusYears(nbAnneesAnciennete), 2000d, performance, tauxActivite);
+        //When
+        Double prime = employe.getPrimeAnnuelle();
+        //Then
+        Assertions.assertThat(prime).isEqualTo(primeCalculee);
     }
 
 
