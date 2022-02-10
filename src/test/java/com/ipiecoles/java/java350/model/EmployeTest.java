@@ -72,7 +72,10 @@ public class EmployeTest {
             "'T12345', 0, 1.0, 1, 1000.0",
             "'T12345', 0, 1.0, 3, 3300.0",//1000 * 1.7 + 0 * 1 = 1700
             ", 0, 1.0, 1, 1000.0", //(1000 + 0 * 100) * 1 = 1000
-            "'T12345', 0, 1.0,, 1000.0"
+            "'T12345', 0, 1.0,, 1000.0",
+            "'T12345', 1, 1.0, 1, 1100.0",
+            "'T12345', 4, 1.0, 3, 3700.0",
+            "'T12345', 0, 0.5, 1, 500.0",
     })
 //Paramètres : matricule, ancienneté, taux d'activité, performance, prime
     public void testGetPrimeAnnuelle(
