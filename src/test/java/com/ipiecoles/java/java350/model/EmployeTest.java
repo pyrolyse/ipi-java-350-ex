@@ -65,21 +65,12 @@ public class EmployeTest {
 
     }
 
-    //si un employe est un manager => prime de 2200
-    @Test
-    public void TestCheckPrimeManager() {
-        LocalDate d3 = LocalDate.now().minusYears(5);
-        Employe manager = new Employe("Test", "Test", "M25520", d3, 1000d, 1, 1.0);
-
-        Double prime = manager.getPrimeAnnuelle();
-
-        Assertions.assertThat(prime).isEqualTo(2200d);
-    }
-
     @ParameterizedTest(name = "matricule {0}, ancienneté {1}, taux activité {2}, performance {3} => prime {4}")
     @CsvSource({
             "'M12345', 0, 1.0, 1, 1700.0", //1000 * 1.7 + 0 * 1 = 1700
-            "'M12345', 2, 1.0, 1, 1900.0" //1000 * 1.7 + 0 * 1 = 1700
+            "'M12345', 2, 1.0, 1, 1900.0",
+            "'T12345', 0, 1.0, 1, 1000.0",
+            "'T12345', 0, 1.0, 3, 3300.0"//1000 * 1.7 + 0 * 1 = 1700
     })
 //Paramètres : matricule, ancienneté, taux d'activité, performance, prime
     public void testGetPrimeAnnuelle(
