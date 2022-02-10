@@ -94,5 +94,47 @@ public class EmployeTest {
         Assertions.assertThat(prime).isEqualTo(primeCalculee);
     }
 
+    @Test
+    public void TestAugmentersalaire() {
+        //given
+        Employe employe = new Employe("Doe", "John", "M25000", LocalDate.now(), 2500d, 1, 1.0);
+        //when
+        Double salaireAugmenter = employe.augmenterSalaire(3.5);
+        //then
+        Assertions.assertThat(salaireAugmenter).isEqualTo(2587.5d);
+    }
+
+    @ParameterizedTest(name = "poucentage => {0}")
+    @CsvSource({
+          ",",
+          "0",
+          "-1"
+
+    })
+    public void TestAugmenterSalaire(Double pourcentage) {
+        Employe employe = new Employe("Doe", "John", "M25000", LocalDate.now(), 2500d, 1, 1.0);
+
+        Double salaire = employe.getSalaire();
+        Double salaireAugmenter = employe.augmenterSalaire(pourcentage);
+
+        Assertions.assertThat(salaireAugmenter).isEqualTo(salaire);
+    }
+
+    @ParameterizedTest(name = "annee => {0}")
+    @CsvSource({
+           "5"
+
+    })
+    public void TestNbComge(Integer annee) {
+        Employe employe = new Employe("Doe", "John", "M25000", LocalDate.now().minusYears(annee), 2500d, 1, 1.0);
+
+        Integer nbconge = employe.getNbConges();
+
+        Assertions.assertThat(nbconge).isEqualTo(30);
+    }
+
+
+
+
 
 }
