@@ -121,10 +121,11 @@ public class Employe {
 
     //Augmenter salaire
     public Double augmenterSalaire(Double pourcentage){
-        if (pourcentage == null || pourcentage < 1 || pourcentage < 0) {
-            return salaire * 1;
-        }
-        return salaire = salaire + (salaire * (pourcentage / 100));
+       if (pourcentage != null && pourcentage > 1) {
+           return salaire + (salaire * (pourcentage / 100));
+       } else {
+           return salaire * 1;
+       }
     }
 
 

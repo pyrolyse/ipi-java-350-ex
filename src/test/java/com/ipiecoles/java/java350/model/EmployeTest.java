@@ -107,17 +107,33 @@ public class EmployeTest {
     @ParameterizedTest(name = "poucentage => {0}")
     @CsvSource({
           ",",
-          "'0'",
-          "'-1'"
+          "0",
+          "-1"
 
     })
     public void TestAugmenterSalaire(Double pourcentage) {
         Employe employe = new Employe("Doe", "John", "M25000", LocalDate.now(), 2500d, 1, 1.0);
 
+        Double salaire = employe.getSalaire();
         Double salaireAugmenter = employe.augmenterSalaire(pourcentage);
 
-        Assertions.assertThat(salaireAugmenter).isEqualTo(2500d);
+        Assertions.assertThat(salaireAugmenter).isEqualTo(salaire);
     }
+
+    @ParameterizedTest(name = "annee => {0}")
+    @CsvSource({
+           "5"
+
+    })
+    public void TestNbComge(Integer annee) {
+        Employe employe = new Employe("Doe", "John", "M25000", LocalDate.now().minusYears(annee), 2500d, 1, 1.0);
+
+        Integer nbconge = employe.getNbConges();
+
+        Assertions.assertThat(nbconge).isEqualTo(30);
+    }
+
+
 
 
 
