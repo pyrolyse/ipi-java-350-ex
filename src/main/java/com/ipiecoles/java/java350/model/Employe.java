@@ -120,7 +120,13 @@ public class Employe {
     }
 
     //Augmenter salaire
-    //public void augmenterSalaire(double pourcentage){}
+    public Double augmenterSalaire(Double pourcentage){
+        if (pourcentage == null || pourcentage < 1 || pourcentage < 0) {
+            return salaire * 1;
+        }
+        return salaire = salaire + (salaire * (pourcentage / 100));
+    }
+
 
     public Long getId() {
         return id;
